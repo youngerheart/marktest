@@ -1,0 +1,28 @@
+{
+  "name": "marktest",
+  "version": "0.1.2",
+  "description": "a simple way to test web api",
+  "main": "index.js",
+  "scripts": {
+    "test": "make build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youngerheart/marktest.git"
+  },
+  "keywords": [
+    "test",
+    "api",
+    "markdown"
+  ],
+  "author": "youngerheart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youngerheart/marktest/issues"
+  },
+  "homepage": "https://github.com/youngerheart/marktest",
+  "devDependencies": {
+    "should": "^8.2.2",
+    "supertest": "^1.2.0"
+  }
+}
