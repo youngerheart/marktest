@@ -22,7 +22,7 @@ key: Number // a typeObj or current value, then test nothing
 
 key: {
   default: Number // a typeObj or current value
-  options: ['value', 'type', 'require', 'unique'] // what you want to test
+  options: ['value', 'type', 'required', 'unique'] // what you want to test
 }
 ```
 
@@ -37,7 +37,8 @@ key: {
   }
   descStr: [{
     it: itStr,
-    get: '/api/resume/:id', // method and url, get ':id' in req.query
+    url: '/api/resume/:id', // method and url, get ':id' in req.query
+    method: 'get',
     req: {
       query: queryObj,
       body: bodyObj

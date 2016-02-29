@@ -1,8 +1,8 @@
 {
   "name": "marktest",
-  "version": "0.1.2",
+  "version": "0.0.1",
   "description": "a simple way to test web api",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "make build"
   },
@@ -23,6 +23,6 @@
   "homepage": "https://github.com/youngerheart/marktest",
   "devDependencies": {
     "should": "^8.2.2",
-    "supertest": "^1.2.0"
+    "superagent": "^1.7.0"
   }
 }
