@@ -1,16 +1,16 @@
 module.exports = {
   init: {
-    host: 'hire-api.test.ele.me',
+    host: 'http://hire-api.elenet.me',
     params: {}
   },
   'what about login?': [{
-    it: 'should return 401 if I don\'t get userfake api.',
+    desc: 'should return 401 if I don\'t get userfake api.',
     url: '/resume',
     res: {
       code: 401
     }
   }, {
-    it: 'should return userInfo if I get userfake api.',
+    desc: 'should return userInfo if I get userfake api.',
     url: '/user-fake',
     res: {
       code: 200,
@@ -22,13 +22,13 @@ module.exports = {
       }
     }
   }, {
-    it: 'should return 401 if I don\'t get adminfake api.',
+    desc: 'should return 401 if I don\'t get adminfake api.',
     url: '/job/admin',
     res: {
       code: 401
     }
   }, {
-    it: 'should return adminInfo if I get adminfake api.',
+    desc: 'should return adminInfo if I get adminfake api.',
     url: '/admin-fake',
     res: {
       code: 200,
@@ -41,13 +41,17 @@ module.exports = {
     }
   }],
   'what about resume?': [{
-    it: 'should make correct behavior while I post that form',
+    desc: 'should make correct behavior while I post that form',
     url: '/resume',
     method: 'post',
     req: {
       body: {
         realName: {
           default: 'hehe',
+          options: ['required', 'type']
+        },
+        practice: {
+          default: false,
           options: ['required', 'type']
         },
         household: {
@@ -82,7 +86,11 @@ module.exports = {
           collage: {
             default: String,
             options: ['required']
-          }
+          },
+          profession: String,
+          degree: String,
+          languageLevel: String,
+          rank: String
         }],
         workExperience: [{
           dateStart: {
@@ -96,7 +104,13 @@ module.exports = {
           company: {
             default: String,
             options: ['required']
-          }
+          },
+          category: String,
+          jobName: String,
+          department: String,
+          place: String,
+          salary: String,
+          describe: String
         }],
         projectExperience: [{
           dateStart: {
@@ -112,6 +126,22 @@ module.exports = {
             options: ['required']
           }
         }]
+      }
+    },
+    res: {
+      code: 204,
+      testCode: [204, 400]
+    }
+  }, {
+    desc: 'should get own resume',
+    url: '/resume',
+    res: {
+      code: 200,
+      body: {
+        realName: {
+          default: String,
+          options: ['required', 'type']
+        }
       }
     }
   }]

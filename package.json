@@ -23,6 +23,6 @@
   "homepage": "https://github.com/youngerheart/marktest",
   "devDependencies": {
     "should": "^8.2.2",
-    "superagent": "^1.7.0"
+    "request": "^2.69.0"
   }
 }
