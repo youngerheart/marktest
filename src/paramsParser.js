@@ -1,4 +1,5 @@
 var params = {};
+var keys = null;
 
 var getKeys = (str) => {
   if(str[str.length - 1] === ']') str = str.slice(-0, -1);
@@ -6,33 +7,35 @@ var getKeys = (str) => {
   return str.split('.');
 };
 
+var walk = (obj, i) => {
+  if(!i) i = 0;
+  if(typeof obj[keys[i]] === 'undefined') return;
+  else if(typeof obj[keys[i]] === 'object') return walk(obj[keys[i]], ++i);
+  else return JSON.parse(JSON.stringify(obj[keys[i]]));
+}
+
 module.exports = {
   init(obj) {
     params = obj;
   },
   get(str) {
-    var keys = getKeys(str);
-    var walk = (obj, i) => {
-      if(!i) i = 0;
-      if(!keys[i]) return obj;
-      if(typeof obj[keys[i]] === 'undefined') return;
-      if(typeof obj[keys[i]] === 'object') return walk(obj[keys[i]], ++i);
-    }
+    keys = getKeys(str);
     return walk(params);
   },
   set(str, val) {
-    var keys = getKeys(str);
+    keys = getKeys(str);
     var walk = (obj, i) => {
       if(!i) i = 0;
       if(keys[i + 1]) {
         if(isNaN(keys[i + 1])) obj[keys[i]] = {};
         else obj[keys[i]] = [];
-        walk(obj[keys[i]], ++i);
+        return walk(obj[keys[i]], ++i);
       } else {
         obj[keys[i]] = val;
+        return true;
       }
     }
-    walk(params);
+    return walk(params);
   },
   url(url) {
     var args = url.match(/\$\{(.*?)\}/g);
@@ -42,5 +45,10 @@ module.exports = {
       url = url.replace('${' + {arg} + '}', module.exports.get(arg));
     });
     return url;
+  },
+  fetch(obj, str, key) {
+    keys = getKeys(str);
+    var value = walk(obj);
+    return module.exports.set(key, value);
   }
 };

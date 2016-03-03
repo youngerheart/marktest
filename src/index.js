@@ -4,7 +4,6 @@ const request = require('request').defaults({jar: true});
 const should = require('should');
 
 const getReqArr = require('./getReqArr');
-const getUrl = require('./getUrl');
 const checkRes = require('./checkRes');
 const paramsParser = require('./paramsParser');
 
@@ -17,10 +16,11 @@ const host = objs.init.host;
 const test = (key, testArr) => {
   describe(key, () => {
     testArr.forEach((test, index) => {
+      if(test.disabled) return it(`disabled ${test.desc}`, (done) => done());
       if(!test.desc) throw `Error: can\'t find describe about ${key} index ${index}`;
       describe(test.desc, () => {
         should.exist(test.url);
-        let url = getUrl(test.url, test.req);
+        let url = paramsParser.url(test.url, test.req);
         let reqArr = getReqArr(test.req);
         reqArr.forEach((params, index) => {
           it('check ' + (params.desc || 'defaults') + ' about ' + url, (done) => {

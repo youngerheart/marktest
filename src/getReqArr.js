@@ -71,20 +71,20 @@ const getParamsArr = (obj, params, routes) => {
         switch(option) {
           case 'required':
             delete pointers[1][key];
-            resArr.push(clone(params, 'required of ' + route.join('.') + '.' + key));
+            resArr.push(clone(params, 'required of ' + key));
             pointers[1][key] = value;
             break;
           case 'type':
             for(let type in typePoint) {
               if(thatType === type) continue;
               pointers[1][key] = typePoint[type](Math.random());
-              resArr.push(clone(params, 'type of ' + route.join('.') + '.' + key));
+              resArr.push(clone(params, 'type of ' + key));
               pointers[1][key] = value;
             }
             break;
           case 'unique':
             pointers[1][key] = typePoint[thatType](Math.random());
-            resArr.push(clone(params, 'unique of ' + route.join('.') + '.' + key), clone(params, 'unique of ' + route.join('.') + '.' + key));
+            resArr.push(clone(params, 'unique of ' + key), clone(params, 'unique of ' + key));
             pointers[1][key] = value;
             break;
         }
