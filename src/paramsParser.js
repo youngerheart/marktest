@@ -42,7 +42,7 @@ module.exports = {
     if(!args) return url;
     args = args.map(x => x.slice(2,-1));
     args.forEach((arg) => {
-      url = url.replace('${' + {arg} + '}', module.exports.get(arg));
+      url = url.replace('${' + arg + '}', module.exports.get(arg) || '');
     });
     return url;
   },
