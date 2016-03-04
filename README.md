@@ -1,5 +1,10 @@
 # marktest
+
+[![NPM version](https://img.shields.io/npm/v/marktest.svg)](https://www.npmjs.com/package/marktest) [![Downloads](https://img.shields.io/npm/dm/marktest.svg)](http://badge.fury.io/js/marktest)
+
 a simple way to test web api
+
+![demo](https://cloud.githubusercontent.com/assets/8231964/13519913/ef6117b2-e216-11e5-930e-f51ae89250ba.gif)
 
 ## install
 
@@ -41,7 +46,7 @@ key: {
   descStr: [{
     it: itStr,
     disabled: false, // disabled this test item, default false.
-    url: '/api/resume/${id}', // request url, get ':id' in init.params and res.save
+    url: '/api/resume/${id}', // request url, get 'id' in init.params and res.save
     method: 'get', // get, post, put, del, default get
     req: {
       query: queryObj,
