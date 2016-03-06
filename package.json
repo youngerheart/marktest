@@ -1,10 +1,13 @@
 {
   "name": "marktest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a simple way to test web api",
   "main": "src/index.js",
   "scripts": {
     "test": "make build"
+  },
+  "bin": {
+    "marktest": "bin/marktest.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
   },
   "homepage": "https://github.com/youngerheart/marktest",
   "dependencies": {
+    "mocha": "^2.4.0",
     "should": "^8.2.2",
     "request": "^2.69.0"
   }
