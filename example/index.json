@@ -11,8 +11,8 @@
         "body": [
           {
             "id": {
-              "default": 123,
-              "options": [
+              "_type": "number",
+              "_options": [
                 "type",
                 "required"
               ]
