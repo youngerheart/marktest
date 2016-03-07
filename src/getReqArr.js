@@ -18,10 +18,6 @@ const getCurrent = (obj, params, routeArr, routes) => {
       routeArr.splice(routeArr.length - 2, 2);
       continue;
     }
-    if(typeof obj[key] === 'function') {
-      params[key] = obj[key](Math.random());
-      continue;
-    }
     if(typeof obj[key] !== 'object') {
       params[key] = null;
       continue;
@@ -40,7 +36,7 @@ const getCurrent = (obj, params, routeArr, routes) => {
       routeArr.push(key);
       routes.push(clone(routeArr));
       routeArr.pop();
-      params[key] = obj[key]._value || typePoint[obj[key]._type];
+      params[key] = typeof obj[key]._value === 'undefined' ? typePoint[obj[key]._type](Math.random()) : obj[key]._value;
     }
   }
   return [params, routes];

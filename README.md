@@ -4,7 +4,7 @@
 
 a simple way to test web api
 
-![demo](https://cloud.githubusercontent.com/assets/8231964/13519913/ef6117b2-e216-11e5-930e-f51ae89250ba.gif)
+![demo](https://cloud.githubusercontent.com/assets/8231964/13560816/30bfddac-e45f-11e5-930a-7e9b6e3f61b1.gif)
 
 ## install
 
@@ -38,9 +38,9 @@ $ mocha index.js
 key: Number // a typeObj or current value, then test nothing.
 
 key: {
-  type: 'object',
-  value: 'xx', // a true value.
-  options: ['value', 'type', 'required', 'unique'] // what you want to test.
+  _type: 'object',
+  _value: 'xx', // a true value.
+  _options: ['value', 'type', 'required', 'unique'] // what you want to test.
 }
 ```
 
