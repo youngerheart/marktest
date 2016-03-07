@@ -8,7 +8,7 @@ const checkRes = require('./checkRes');
 const paramsParser = require('./paramsParser');
 
 module.exports = (objs) => {
-  if(!objs.init || !objs.init.host) throw 'Error: can\'t find initial info';
+  if(!objs.init || !objs.init.host) return console.log('\x1b[36m', 'Marktest Error: can\'t find initial info' ,'\x1b[0m');
   if(objs.params) paramsParser.init(objs.params);
 
   const host = objs.init.host;
@@ -16,9 +16,9 @@ module.exports = (objs) => {
     describe(key, () => {
       testArr.forEach((test, index) => {
         if(test.disabled) return it(`disabled ${test.desc}`, (done) => done());
-        if(!test.desc) throw `Error: can\'t find describe about ${key} index ${index}`;
+        if(!test.desc) return console.log(`Error: can\'t find describe about ${key} index ${index}`);
         describe(test.desc, () => {
-          should.exist(test.url);
+          should(test.url).exist;
           let reqArr = getReqArr(test.req);
           reqArr.forEach((params, index) => {
             it(`check ${params.desc || 'defaults'} about ${test.method || 'get'} ${test.url}`, (done) => {
@@ -29,8 +29,9 @@ module.exports = (objs) => {
                 headers: {
                   'Content-Type': 'application/json'
                 }
-              }, (error, res, body) => {
-                checkRes(test.res, res, body, params.desc);
+              }, (err, res, body) => {
+                should(test.res).be.type('object');
+                if(body) checkRes(test.res, res, body, params.desc);
                 done();
               });
             });

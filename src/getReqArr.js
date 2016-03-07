@@ -1,7 +1,5 @@
 "use strict"
 
-const should = require('should');
-
 const typePoint = {
   string: String,
   number: Number,
@@ -28,20 +26,21 @@ const getCurrent = (obj, params, routeArr, routes) => {
       params[key] = null;
       continue;
     }
-    if(!obj[key].default && !obj[key].options) {
+    if(!obj[key]._type && !obj[key]._value && !obj[key]._options) {
       params[key] = {};
       routeArr.push(key);
       getCurrent(obj[key], params[key], routeArr, routes);
       continue;
     }
-    if(typeof obj[key].default === 'undefined') {
+    if(obj[key]._type === 'undefined' ||
+      (!obj[key]._type && typeof obj[key]._value === 'undefined')) {
       params[key] = null;
       continue;
     } else {
       routeArr.push(key);
       routes.push(clone(routeArr));
       routeArr.pop();
-      params[key] = typeof obj[key].default === 'function' ? obj[key].default(Math.random()) : obj[key].default;
+      params[key] = obj[key]._value || typePoint[obj[key]._type];
     }
   }
   return [params, routes];
@@ -66,8 +65,8 @@ const getParamsArr = (obj, params, routes) => {
     for(let key in pointers[0]) {
       let value = pointers[1][key];
       let thatType = typeof value;
-      if (!pointers[0][key].options) continue;
-      pointers[0][key].options.forEach((option) => {
+      if (!pointers[0][key]._options) continue;
+      pointers[0][key]._options.forEach((option) => {
         switch(option) {
           case 'required':
             delete pointers[1][key];
